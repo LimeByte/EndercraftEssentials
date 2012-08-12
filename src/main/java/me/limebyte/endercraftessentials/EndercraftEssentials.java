@@ -48,7 +48,7 @@ public class EndercraftEssentials extends JavaPlugin {
 	 * Gets the current running EndercraftEssentials Object instance.
 	 * @return The current instance
 	 */
-	public final EndercraftEssentials getInstance() {
+	public static EndercraftEssentials getInstance() {
 		return instance;
 	}
 	
