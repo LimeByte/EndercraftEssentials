@@ -1,0 +1,11 @@
+name: ${project.name}
+author: LimeByte
+version: ${project.version}
+description: ${project.description}
+
+main: me.limebyte.endercraftessentials.EndercraftEssentials
+load: POSTWORLD
+
+database: false
+
+depend: [Spout]
