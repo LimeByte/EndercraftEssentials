@@ -20,6 +20,7 @@ public class SplashScreen {
 	 * Attaches the splash screen to the player.
 	 */
 	public void attach(final String splashURL) {
+		image = new GenericTexture();
 		image.setAnchor(WidgetAnchor.CENTER_CENTER);
 		image.setWidth(WIDTH).setHeight(HEIGHT);
 		image.setX(-WIDTH / 2).setY(-HEIGHT / 2);
