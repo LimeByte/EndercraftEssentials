@@ -32,7 +32,7 @@ public class SplashScreen {
 		image.setUrl(splashURL).setDrawAlphaChannel(true);
 		
 		screen.attachWidget(EndercraftEssentials.getInstance(), image);
-		screen.animate(WidgetAnim.POS_X, WIDTH / 2 + (screen.getWidth() / 2), DURATION, (short) 1, false, false);
+		screen.animate(WidgetAnim.POS_X, screen.getWidth() / 2 - WIDTH / 2, DURATION, (short) 1, false, false);
 		screen.animateStart();
 	}
 	
