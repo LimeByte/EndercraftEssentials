@@ -6,6 +6,15 @@ description: ${project.description}
 main: me.limebyte.endercraftessentials.EndercraftEssentials
 load: POSTWORLD
 
+website: ${project.url}
 database: false
 
-depend: [Spout]
+commands:
+  kick:
+    description: Used to kick users from a server.
+    usage: |
+        /kick <username>\n/kick <username> <reason>
+  fixmobs:
+    description: Used to fix undead mobs in a world.
+    usage: |
+        /fixmobs

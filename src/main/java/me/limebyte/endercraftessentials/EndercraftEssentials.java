@@ -2,6 +2,9 @@ package me.limebyte.endercraftessentials;
 
 import java.util.logging.Logger;
 
+import me.limebyte.endercraftessentials.commands.FixMobsCommand;
+import me.limebyte.endercraftessentials.commands.KickCommand;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -30,6 +33,10 @@ public class EndercraftEssentials extends JavaPlugin {
 		
 		// Register Events
 		this.getServer().getPluginManager().registerEvents(new EventListener(), this);
+		
+		// Load command class
+		getCommand("kick").setExecutor(new KickCommand());
+		getCommand("fixmobs").setExecutor(new FixMobsCommand());
 		
 		// Log enable message
 		this.log().info("Enabled!");
