@@ -15,7 +15,7 @@ public class FixMobsCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (args[0] == null) {
+		if (args[0].isEmpty()) {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				fixMobs(player.getWorld());
