@@ -82,6 +82,14 @@
                     <include>*.yml</include>
                 </includes>
             </resource>
+            <resource>
+                <targetPath>.</targetPath>
+                <directory>${basedir}/src/main/resources/</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>*.jar</include>
+                </includes>
+            </resource>
         </resources>
         
         <!-- Plugins -->
