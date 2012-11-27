@@ -2,6 +2,7 @@ package me.limebyte.endercraftessentials;
 
 import java.util.logging.Logger;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EndercraftEssentials extends JavaPlugin {
@@ -14,7 +15,14 @@ public class EndercraftEssentials extends JavaPlugin {
         instance = this;
         logger = this.getLogger();
 
-        this.getServer().getPluginManager().registerEvents(new EventListener(), this);
+        PluginManager pm = this.getServer().getPluginManager();
+
+        if (!Nameplates.init(this)) {
+            pm.disablePlugin(this);
+            return;
+        }
+
+        pm.registerEvents(new EventListener(), this);
         this.log().info("Enabled!");
     }
 

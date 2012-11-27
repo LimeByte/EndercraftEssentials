@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.kitteh.tag.PlayerReceiveNameTagEvent;
+import org.kitteh.tag.TagAPI;
 
 public class EventListener implements Listener {
 
@@ -19,11 +21,12 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            Material heldItem = event.getItem().getType();
-            if (heldItem != null && heldItem.equals(LIGHT_ITEM)) {
-                Block block = event.getClickedBlock().getRelative(event.getBlockFace());
-                int lightLevel = block.getLightLevel();
-                event.getPlayer().sendMessage(ChatColor.GOLD + "The light level of the selected block is " + lightLevel + ".");
+            if (event.getItem().getType() != null) {
+                if (event.getItem().getType() == LIGHT_ITEM) {
+                    Block block = event.getClickedBlock().getRelative(event.getBlockFace());
+                    int lightLevel = block.getLightLevel();
+                    event.getPlayer().sendMessage(ChatColor.GOLD + "The light level of the selected block is " + lightLevel + ".");
+                }
             }
         }
     }
@@ -38,13 +41,20 @@ public class EventListener implements Listener {
         player.sendMessage(welcome);
     }
 
+    @EventHandler
+    public void onNameplate(PlayerReceiveNameTagEvent event) {
+        if (!event.isModified()) {
+            event.setTag(event.getNamedPlayer().getDisplayName());
+        }
+    }
+
     private void setDisplayName(Player player) {
         String name = player.getName();
 
         if (name.equalsIgnoreCase("limebyte")) {
             rename(player, "LimeByte");
         } else if (name.equalsIgnoreCase("bj2864")) {
-            rename(player, "BenBoy");
+            rename(player, "BennyBoi");
         } else if (name.equalsIgnoreCase("bg1345")) {
             rename(player, "Ashpof");
         } else if (name.equalsIgnoreCase("tegdim")) {
@@ -55,6 +65,7 @@ public class EventListener implements Listener {
     private void rename(Player player, String name) {
         player.setDisplayName(name);
         player.setPlayerListName(name);
+        TagAPI.refreshPlayer(player);
         EndercraftEssentials.getInstance().log().info("Renamed " + player.getName() + " to " + name + ".");
     }
 
