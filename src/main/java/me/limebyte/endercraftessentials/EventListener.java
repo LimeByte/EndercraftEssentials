@@ -2,6 +2,7 @@ package me.limebyte.endercraftessentials;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +20,8 @@ public class EventListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (event.getItem().getType() == LIGHT_ITEM) {
-                int lightLevel = event.getClickedBlock().getLightLevel();
+                Block block = event.getClickedBlock().getRelative(event.getBlockFace());
+                int lightLevel = block.getLightLevel();
                 event.getPlayer().sendMessage(ChatColor.GOLD + "The light level of the selected block is " + lightLevel + ".");
             }
         }
@@ -39,14 +41,19 @@ public class EventListener implements Listener {
         String name = player.getName();
 
         if (name == "limebyte") {
-            player.setDisplayName("LimeByte");
+            rename(player, "LimeByte");
         } else if (name == "bj2864") {
-            player.setDisplayName("BenBoy");
+            rename(player, "BenBoy");
         } else if (name == "bg1345") {
-            player.setDisplayName("Ashpof");
+            rename(player, "Ashpof");
         } else if (name == "tegdim") {
-            player.setDisplayName("Tegdim");
+            rename(player, "Tegdim");
         }
+    }
+
+    private void rename(Player player, String name) {
+        player.setDisplayName(name);
+        player.setPlayerListName(name);
     }
 
 }
