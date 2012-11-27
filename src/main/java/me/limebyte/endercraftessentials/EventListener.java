@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.kitteh.tag.PlayerReceiveNameTagEvent;
 import org.kitteh.tag.TagAPI;
 
@@ -40,6 +41,12 @@ public class EventListener implements Listener {
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
         player.sendMessage(welcome);
         event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        event.setQuitMessage(event.getQuitMessage().replaceAll(player.getName(), player.getDisplayName()));
     }
 
     @EventHandler
