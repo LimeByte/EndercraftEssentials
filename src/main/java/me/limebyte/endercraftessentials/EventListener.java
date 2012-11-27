@@ -38,8 +38,7 @@ public class EventListener implements Listener {
         setDisplayName(player);
         String welcome = ChatColor.DARK_PURPLE + "Welcome to Endercraft " + player.getDisplayName() + "!";
         String message = REI_PREFIX + "&2&3" + REI_SUFFIX;
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-        player.sendMessage(welcome);
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', message) + welcome);
         event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
     }
 
