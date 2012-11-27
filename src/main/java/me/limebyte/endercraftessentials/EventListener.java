@@ -78,7 +78,6 @@ public class EventListener implements Listener {
         player.setDisplayName(name);
         player.setPlayerListName(name);
         TagAPI.refreshPlayer(player);
-        EndercraftEssentials.getInstance().log().info("Renamed " + player.getName() + " to " + name + ".");
     }
 
 }
