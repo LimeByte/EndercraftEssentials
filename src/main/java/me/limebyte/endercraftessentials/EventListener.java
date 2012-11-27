@@ -21,7 +21,7 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (event.getItem().getType() != null) {
+            if (event.getItem() != null) {
                 if (event.getItem().getType() == LIGHT_ITEM) {
                     Block block = event.getClickedBlock().getRelative(event.getBlockFace());
                     int lightLevel = block.getLightLevel();
@@ -39,12 +39,18 @@ public class EventListener implements Listener {
         String message = REI_PREFIX + "&2&3" + REI_SUFFIX;
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
         player.sendMessage(welcome);
+        event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
     }
 
     @EventHandler
     public void onNameplate(PlayerReceiveNameTagEvent event) {
         if (!event.isModified()) {
-            event.setTag(event.getNamedPlayer().getDisplayName());
+            String name = event.getNamedPlayer().getName();
+            String displayName = event.getNamedPlayer().getDisplayName();
+
+            if (name.equalsIgnoreCase("bj2864") || name.equalsIgnoreCase("bg1345")) {
+                event.setTag(displayName);
+            }
         }
     }
 
