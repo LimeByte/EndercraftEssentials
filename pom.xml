@@ -5,7 +5,7 @@
 	<name>EndercraftEssentials</name>
 	<groupId>me.limebyte</groupId>
 	<artifactId>endercraftessentials</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<inceptionYear>2012</inceptionYear>
 	<description>A bunch of game additions for my private server, Endercraft.</description>
 
@@ -14,7 +14,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<githubRepo>LimeByte/EndercraftEssentials</githubRepo>
 		<bukkitVersion>RELEASE</bukkitVersion>
-		<spoutVersion>dev-SNAPSHOT</spoutVersion>
 	</properties>
 	
 	<!-- License -->
@@ -45,10 +44,6 @@
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>spout-repo</id>
-            <url>http://repo.spout.org</url>
-        </repository>
     </repositories>
 
 	<!-- Dependencies -->
@@ -59,12 +54,6 @@
             <version>${bukkitVersion}</version>
             <scope>provided</scope>
         </dependency>
-    <dependency>
-    	<groupId>org.getspout</groupId>
-    	<artifactId>spoutplugin</artifactId>
-    	<version>${spoutVersion}</version>
-    	<scope>provided</scope>
-	</dependency>
     </dependencies>
 
 	<!-- Build settings -->
