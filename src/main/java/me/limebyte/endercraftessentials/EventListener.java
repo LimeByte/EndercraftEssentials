@@ -19,7 +19,7 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (event.getItem().getType() == LIGHT_ITEM) {
+            if (event.getItem().getType().equals(LIGHT_ITEM)) {
                 Block block = event.getClickedBlock().getRelative(event.getBlockFace());
                 int lightLevel = block.getLightLevel();
                 event.getPlayer().sendMessage(ChatColor.GOLD + "The light level of the selected block is " + lightLevel + ".");
@@ -39,6 +39,8 @@ public class EventListener implements Listener {
 
     private void setDisplayName(Player player) {
         String name = player.getName();
+
+        EndercraftEssentials.getInstance().log().info(name);
 
         if (name == "limebyte") {
             rename(player, "LimeByte");
