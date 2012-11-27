@@ -19,7 +19,8 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (event.getItem().getType().equals(LIGHT_ITEM)) {
+            Material heldItem = event.getItem().getType();
+            if (heldItem != null && heldItem.equals(LIGHT_ITEM)) {
                 Block block = event.getClickedBlock().getRelative(event.getBlockFace());
                 int lightLevel = block.getLightLevel();
                 event.getPlayer().sendMessage(ChatColor.GOLD + "The light level of the selected block is " + lightLevel + ".");
@@ -40,15 +41,13 @@ public class EventListener implements Listener {
     private void setDisplayName(Player player) {
         String name = player.getName();
 
-        EndercraftEssentials.getInstance().log().info(name);
-
-        if (name == "limebyte") {
+        if (name.equalsIgnoreCase("limebyte")) {
             rename(player, "LimeByte");
-        } else if (name == "bj2864") {
+        } else if (name.equalsIgnoreCase("bj2864")) {
             rename(player, "BenBoy");
-        } else if (name == "bg1345") {
+        } else if (name.equalsIgnoreCase("bg1345")) {
             rename(player, "Ashpof");
-        } else if (name == "tegdim") {
+        } else if (name.equalsIgnoreCase("tegdim")) {
             rename(player, "Tegdim");
         }
     }
@@ -56,6 +55,7 @@ public class EventListener implements Listener {
     private void rename(Player player, String name) {
         player.setDisplayName(name);
         player.setPlayerListName(name);
+        EndercraftEssentials.getInstance().log().info("Renamed " + player.getName() + " to " + name + ".");
     }
 
 }
