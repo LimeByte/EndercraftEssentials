@@ -1,34 +1,44 @@
 package me.limebyte.endercraftessentials;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 
+/**
+ * Utility class for searching for the natural bedrock formation used to assist
+ * in killing a Wither.
+ * @author LimeByte
+ * @version 4
+ */
 public class WitherFormationFinder {
 
-    public static void searchArea(Player player, int radius) {
-        Location check = player.getLocation();
-        final int x = check.getBlockX();
-        final int z = check.getBlockZ();
-        boolean found = false;
+    public static Set<Location> searchArea(Location location, int radius) {
+        Set<Location> locations = new HashSet<Location>();
+        final int x = location.getBlockX();
+        final int z = location.getBlockZ();
 
         for (int xOffset = -radius; xOffset < radius; xOffset++) {
-            check.setX(x + xOffset);
+            location.setX(x + xOffset);
             for (int zOffset = -radius; zOffset < radius; zOffset++) {
-                check.setZ(z + zOffset);
-                if (checkY(check)) {
-                    player.sendMessage("Found bedrock formation at " + check.getBlockX() + ", " + check.getBlockZ() + ".");
-                    found = true;
+                location.setZ(z + zOffset);
+                if (check(location)) {
+                    locations.add(location);
                 }
             }
         }
 
-        if (!found) {
-            player.sendMessage("No bedrock formations found.");
+        if (radius == 0) {
+            if (check(location)) {
+                locations.add(location);
+            }
         }
+
+        return locations;
     }
 
-    private static boolean checkY(Location location) {
+    private static boolean checkCentre(Location location) {
         location.setY(1);
         if (location.getBlock().getType() == Material.BEDROCK) return false;
 
@@ -42,6 +52,38 @@ public class WitherFormationFinder {
         if (location.getBlock().getType() != Material.BEDROCK) return false;
 
         return true;
+    }
+
+    private static boolean checkSide(Location location) {
+        location.setY(2);
+        if (location.getBlock().getType() == Material.BEDROCK) return false;
+
+        location.setY(3);
+        if (location.getBlock().getType() == Material.BEDROCK) return false;
+
+        return true;
+    }
+
+    private static boolean check(Location location) {
+        if (!checkCentre(location)) return false;
+
+        final int x = location.getBlockX();
+        final int z = location.getBlockZ();
+
+        location.setX(x - 1);
+        if (checkSide(location)) {
+            location.setX(x + 1);
+            if (checkSide(location)) return true;
+        }
+
+        location.setX(x);
+        location.setZ(z - 1);
+        if (checkSide(location)) {
+            location.setZ(z + 1);
+            if (checkSide(location)) return true;
+        }
+
+        return false;
     }
 
 }

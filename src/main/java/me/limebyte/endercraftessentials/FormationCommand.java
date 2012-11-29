@@ -1,5 +1,8 @@
 package me.limebyte.endercraftessentials;
 
+import java.util.Set;
+
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +25,17 @@ public class FormationCommand implements CommandExecutor {
                         return true;
                     }
 
-                    WitherFormationFinder.searchArea(player, radius);
+                    Set<Location> locations = WitherFormationFinder.searchArea(player.getLocation(), radius);
+                    if (locations.isEmpty()) {
+                        player.sendMessage("No bedrock formations found.");
+                    } else {
+                        String coords = "";
+                        for (Location loc : locations) {
+                            coords += "(" + loc.getBlockX() + ", " + loc.getBlockZ() + "), ";
+                        }
+                        player.sendMessage("Found " + locations.size() + "bedrock formations at:");
+                        player.sendMessage(coords.substring(0, coords.length() - 2));
+                    }
                 } catch (NumberFormatException e) {
                     sender.sendMessage("Invalid radius.");
                     sender.sendMessage("Usage: " + cmd.getUsage());
