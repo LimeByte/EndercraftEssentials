@@ -8,3 +8,8 @@ load: POSTWORLD
 
 website: ${project.url}
 database: false
+
+commands:
+   formation:
+      description: Bedrock formation checker.
+      usage: /<command> <radius>

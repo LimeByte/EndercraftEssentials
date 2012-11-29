@@ -23,6 +23,7 @@ public class EndercraftEssentials extends JavaPlugin {
         }
 
         pm.registerEvents(new EventListener(), this);
+        getCommand("formation").setExecutor(new FormationCommand());
         this.log().info("Enabled!");
     }
 
