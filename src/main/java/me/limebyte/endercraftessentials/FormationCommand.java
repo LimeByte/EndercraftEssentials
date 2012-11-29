@@ -34,7 +34,7 @@ public class FormationCommand implements CommandExecutor {
                         for (Location loc : locations) {
                             coords += "(" + loc.getBlockX() + ", " + loc.getBlockZ() + "), ";
                         }
-                        player.sendMessage(ChatColor.GREEN + "Found " + locations.size() + " bedrock formations at:");
+                        player.sendMessage(ChatColor.GREEN + "Found " + locations.size() + " bedrock formation(s) at:");
                         player.sendMessage(coords.substring(0, coords.length() - 2));
                     }
                 } catch (NumberFormatException e) {
