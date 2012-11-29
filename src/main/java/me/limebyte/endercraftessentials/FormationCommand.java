@@ -16,6 +16,12 @@ public class FormationCommand implements CommandExecutor {
             if (args != null && args[0] != null) {
                 try {
                     int radius = Integer.parseInt(args[0]);
+
+                    if (radius > 100) {
+                        sender.sendMessage("Calm down mate!  Not too big!");
+                        return true;
+                    }
+
                     WitherFormationFinder.searchArea(player, radius);
                 } catch (NumberFormatException e) {
                     sender.sendMessage("Invalid radius.");

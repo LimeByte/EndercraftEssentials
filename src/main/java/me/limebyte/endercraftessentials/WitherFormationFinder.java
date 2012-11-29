@@ -10,6 +10,7 @@ public class WitherFormationFinder {
         Location check = player.getLocation();
         final int x = check.getBlockX();
         final int z = check.getBlockZ();
+        boolean found = false;
 
         for (int xOffset = -radius; xOffset < radius; xOffset++) {
             check.setX(x + xOffset);
@@ -17,20 +18,25 @@ public class WitherFormationFinder {
                 check.setZ(z + zOffset);
                 if (checkY(check)) {
                     player.sendMessage("Found bedrock formation at " + check.getBlockX() + ", " + check.getBlockZ() + ".");
+                    found = true;
                 }
             }
+        }
+
+        if (!found) {
+            player.sendMessage("No bedrock formations found.");
         }
     }
 
     private static boolean checkY(Location location) {
         location.setY(1);
-        if (location.getBlock().getType() != Material.AIR) return false;
+        if (location.getBlock().getType() == Material.BEDROCK) return false;
 
         location.setY(2);
-        if (location.getBlock().getType() != Material.AIR) return false;
+        if (location.getBlock().getType() == Material.BEDROCK) return false;
 
         location.setY(3);
-        if (location.getBlock().getType() != Material.AIR) return false;
+        if (location.getBlock().getType() == Material.BEDROCK) return false;
 
         location.setY(4);
         if (location.getBlock().getType() != Material.BEDROCK) return false;
