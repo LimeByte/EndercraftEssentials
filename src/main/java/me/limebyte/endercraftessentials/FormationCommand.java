@@ -2,6 +2,7 @@ package me.limebyte.endercraftessentials;
 
 import java.util.Set;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,7 +17,7 @@ public class FormationCommand implements CommandExecutor {
             sender.sendMessage("This command can only be run by a player.");
         } else {
             Player player = (Player) sender;
-            if (args != null && args[0] != null) {
+            if (args != null && args.length >= 1) {
                 try {
                     int radius = Integer.parseInt(args[0]);
 
@@ -27,21 +28,21 @@ public class FormationCommand implements CommandExecutor {
 
                     Set<Location> locations = WitherFormationFinder.searchArea(player.getLocation(), radius);
                     if (locations.isEmpty()) {
-                        player.sendMessage("No bedrock formations found.");
+                        player.sendMessage(ChatColor.RED + "No bedrock formations found.");
                     } else {
                         String coords = "";
                         for (Location loc : locations) {
                             coords += "(" + loc.getBlockX() + ", " + loc.getBlockZ() + "), ";
                         }
-                        player.sendMessage("Found " + locations.size() + "bedrock formations at:");
+                        player.sendMessage(ChatColor.GREEN + "Found " + locations.size() + " bedrock formations at:");
                         player.sendMessage(coords.substring(0, coords.length() - 2));
                     }
                 } catch (NumberFormatException e) {
-                    sender.sendMessage("Invalid radius.");
+                    sender.sendMessage(ChatColor.RED + "Invalid radius.");
                     sender.sendMessage("Usage: " + cmd.getUsage());
                 }
             } else {
-                sender.sendMessage("Please specify a radius.");
+                sender.sendMessage(ChatColor.RED + "Please specify a radius.");
                 sender.sendMessage("Usage: " + cmd.getUsage());
             }
         }

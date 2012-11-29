@@ -10,7 +10,7 @@ import org.bukkit.Material;
  * Utility class for searching for the natural bedrock formation used to assist
  * in killing a Wither.
  * @author LimeByte
- * @version 4
+ * @version 5
  */
 public class WitherFormationFinder {
 
@@ -20,11 +20,10 @@ public class WitherFormationFinder {
         final int z = location.getBlockZ();
 
         for (int xOffset = -radius; xOffset < radius; xOffset++) {
-            location.setX(x + xOffset);
             for (int zOffset = -radius; zOffset < radius; zOffset++) {
-                location.setZ(z + zOffset);
-                if (check(location)) {
-                    locations.add(location);
+                Location check = new Location(location.getWorld(), x + xOffset, 0, z + zOffset);
+                if (check(check)) {
+                    locations.add(check);
                 }
             }
         }
