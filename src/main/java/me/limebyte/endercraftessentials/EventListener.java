@@ -43,7 +43,12 @@ public class EventListener implements Listener {
         event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
 
         if (player.getName().equalsIgnoreCase("bg1345") || player.getName().equalsIgnoreCase("jkjoka")) {
-            player.sendMessage("You pranked me with blocks now I have pranked you with code.  Have fun noob.");
+            player.sendMessage("You have pranked");
+            player.sendMessage("but are now outranked.");
+            player.sendMessage("Blocks for code,");
+            player.sendMessage("pranks echoed.");
+            player.sendMessage("Not to be rude,");
+            player.sendMessage("but I have called you a noob.");
         }
     }
 
