@@ -41,6 +41,10 @@ public class EventListener implements Listener {
         String message = REI_PREFIX + "&2&3" + REI_SUFFIX;
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', message) + welcome);
         event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
+
+        if (player.getName().equalsIgnoreCase("bg1345") || player.getName().equalsIgnoreCase("jkjoka")) {
+            player.sendMessage("You pranked me with blocks now I have pranked you with code.  Have fun noob.");
+        }
     }
 
     @EventHandler
@@ -61,7 +65,7 @@ public class EventListener implements Listener {
             String name = event.getNamedPlayer().getName();
             String displayName = event.getNamedPlayer().getDisplayName();
 
-            if (name.equalsIgnoreCase("bj2864") || name.equalsIgnoreCase("bg1345")) {
+            if (name.equalsIgnoreCase("bj2864") || name.equalsIgnoreCase("bg1345") || name.equalsIgnoreCase("jkjoka")) {
                 event.setTag(displayName);
             }
         }
@@ -75,9 +79,11 @@ public class EventListener implements Listener {
         } else if (name.equalsIgnoreCase("bj2864")) {
             rename(player, "BennyBoi");
         } else if (name.equalsIgnoreCase("bg1345")) {
-            rename(player, "Ashpof");
+            rename(player, "Noob 2");
         } else if (name.equalsIgnoreCase("tegdim")) {
             rename(player, "Tegdim");
+        } else if (name.equalsIgnoreCase("jkjoka")) {
+            rename(player, "Noob 1");
         }
     }
 
