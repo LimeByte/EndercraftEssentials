@@ -10,6 +10,8 @@ public class EndercraftEssentials extends JavaPlugin {
     private static EndercraftEssentials instance;
     private static Logger logger;
 
+    private static final String[] pranked = { "jkjoka", "bg1345" };
+
     @Override
     public void onEnable() {
         instance = this;
@@ -38,6 +40,10 @@ public class EndercraftEssentials extends JavaPlugin {
 
     public Logger log() {
         return logger;
+    }
+
+    public static String[] getPrankedNames() {
+        return pranked;
     }
 
 }

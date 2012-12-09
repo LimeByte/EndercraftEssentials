@@ -17,8 +17,20 @@ import org.kitteh.tag.TagAPI;
 public class EventListener implements Listener {
 
     private static final Material LIGHT_ITEM = Material.GLOWSTONE_DUST;
+
     private static final String REI_PREFIX = "&0&0";
     private static final String REI_SUFFIX = "&e&f";
+    @SuppressWarnings("unused")
+    private static final String REI_CAVE_MAPPING = "&1";
+    private static final String REI_PLAYER_RADAR = "&2";
+    private static final String REI_ANIMAL_RADAR = "&3";
+    @SuppressWarnings("unused")
+    private static final String REI_MOB_RADAR = "&4";
+    @SuppressWarnings("unused")
+    private static final String REI_SLIME_RADAR = "&5";
+    private static final String REI_SQUID_RADAR = "&6";
+    @SuppressWarnings("unused")
+    private static final String REI_LIVING_RADAR = "&7";
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -38,11 +50,11 @@ public class EventListener implements Listener {
         Player player = event.getPlayer();
         setDisplayName(player);
         String welcome = ChatColor.DARK_PURPLE + "Welcome to Endercraft " + player.getDisplayName() + "!";
-        String message = REI_PREFIX + "&2&3" + REI_SUFFIX;
+        String message = REI_PREFIX + REI_PLAYER_RADAR + REI_ANIMAL_RADAR + REI_SQUID_RADAR + REI_SUFFIX;
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', message) + welcome);
         event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
 
-        if (player.getName().equalsIgnoreCase("bg1345") || player.getName().equalsIgnoreCase("jkjoka")) {
+        if (isPranked(player)) {
             player.sendMessage("You have pranked");
             player.sendMessage("but are now outranked.");
             player.sendMessage("Blocks for code,");
@@ -67,10 +79,11 @@ public class EventListener implements Listener {
     @EventHandler
     public void onNameplate(PlayerReceiveNameTagEvent event) {
         if (!event.isModified()) {
-            String name = event.getNamedPlayer().getName();
-            String displayName = event.getNamedPlayer().getDisplayName();
+            Player player = event.getNamedPlayer();
+            String name = player.getName();
+            String displayName = player.getDisplayName();
 
-            if (name.equalsIgnoreCase("bj2864") || name.equalsIgnoreCase("bg1345") || name.equalsIgnoreCase("jkjoka")) {
+            if (name.equalsIgnoreCase("bj2864") || name.equalsIgnoreCase("bg1345") || isPranked(player)) {
                 event.setTag(displayName);
             }
         }
@@ -84,11 +97,13 @@ public class EventListener implements Listener {
         } else if (name.equalsIgnoreCase("bj2864")) {
             rename(player, "BennyBoi");
         } else if (name.equalsIgnoreCase("bg1345")) {
-            rename(player, "Noob 2");
+            rename(player, "Ashpof");
         } else if (name.equalsIgnoreCase("tegdim")) {
             rename(player, "Tegdim");
-        } else if (name.equalsIgnoreCase("jkjoka")) {
-            rename(player, "Noob 1");
+        }
+
+        if (isPranked(player)) {
+            rename(player, "Noob");
         }
     }
 
@@ -96,6 +111,13 @@ public class EventListener implements Listener {
         player.setDisplayName(name);
         player.setPlayerListName(name);
         TagAPI.refreshPlayer(player);
+    }
+
+    private boolean isPranked(Player player) {
+        for (String name : EndercraftEssentials.getPrankedNames()) {
+            if (player.getName().equalsIgnoreCase(name)) return true;
+        }
+        return false;
     }
 
 }
