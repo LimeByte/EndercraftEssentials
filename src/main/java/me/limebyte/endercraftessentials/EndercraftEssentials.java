@@ -10,7 +10,7 @@ public class EndercraftEssentials extends JavaPlugin {
     private static EndercraftEssentials instance;
     private static Logger logger;
 
-    private static final String[] pranked = { "jkjoka", "bg1345" };
+    private static final String[] pranked = {};
 
     @Override
     public void onEnable() {
