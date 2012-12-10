@@ -121,9 +121,9 @@ public class EventListener implements Listener {
                 String number = String.valueOf(System.currentTimeMillis() % 9);
 
                 if (16 - name.length() < 3) {
-                    player.setPlayerListName(name.substring(0, 16 - 3) + number);
+                    player.setPlayerListName(name.substring(0, 16 - 3) + " " + number);
                 } else {
-                    player.setPlayerListName(name + number);
+                    player.setPlayerListName(name + " " + number);
                 }
             } catch (IllegalArgumentException e1) {
                 setPlayerListName(player, name);
