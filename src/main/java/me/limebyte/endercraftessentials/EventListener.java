@@ -109,8 +109,26 @@ public class EventListener implements Listener {
 
     private void rename(Player player, String name) {
         player.setDisplayName(name);
-        player.setPlayerListName(name);
         TagAPI.refreshPlayer(player);
+        setPlayerListName(player, name);
+    }
+
+    private void setPlayerListName(Player player, String name) {
+        try {
+            player.setPlayerListName(name);
+        } catch (IllegalArgumentException e) {
+            try {
+                String number = String.valueOf(System.currentTimeMillis() % 9);
+
+                if (16 - name.length() < 3) {
+                    player.setPlayerListName(name.substring(0, 16 - 3) + number);
+                } else {
+                    player.setPlayerListName(name + number);
+                }
+            } catch (IllegalArgumentException e1) {
+                setPlayerListName(player, name);
+            }
+        }
     }
 
     private boolean isPranked(Player player) {
