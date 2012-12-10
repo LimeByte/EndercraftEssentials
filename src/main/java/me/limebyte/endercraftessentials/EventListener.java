@@ -16,7 +16,8 @@ import org.kitteh.tag.TagAPI;
 
 public class EventListener implements Listener {
 
-    private static final Material LIGHT_ITEM = Material.GLOWSTONE_DUST;
+    private static final Material LIGHT_LEVEL_ITEM = Material.GLOWSTONE_DUST;
+    private static final Material HUNGER_INFO_ITEM = Material.POISONOUS_POTATO;
 
     private static final String REI_PREFIX = "&0&0";
     private static final String REI_SUFFIX = "&e&f";
@@ -36,10 +37,23 @@ public class EventListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (event.getItem() != null) {
-                if (event.getItem().getType() == LIGHT_ITEM) {
+                if (event.getItem().getType() == LIGHT_LEVEL_ITEM) {
                     Block block = event.getClickedBlock().getRelative(event.getBlockFace());
                     int lightLevel = block.getLightLevel();
                     event.getPlayer().sendMessage(ChatColor.GOLD + "The light level of the selected block is " + lightLevel + ".");
+                }
+
+                if (event.getItem().getType() == HUNGER_INFO_ITEM) {
+                    Player player = event.getPlayer();
+                    String title = ChatColor.GOLD + "   --- " +
+                            ChatColor.ITALIC + "Hunger Info" +
+                            ChatColor.RESET + ChatColor.GOLD + " ---   ";
+
+                    player.sendMessage(title);
+                    player.sendMessage(ChatColor.WHITE + "FoodLevel: " + player.getFoodLevel());
+                    player.sendMessage(ChatColor.WHITE + "Saturation: " + player.getSaturation());
+                    player.sendMessage(ChatColor.WHITE + "Exhaustion: " + player.getExhaustion());
+                    player.sendMessage(ChatColor.GOLD + "   -------------------   ");
                 }
             }
         }
