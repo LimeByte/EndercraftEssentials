@@ -42,7 +42,11 @@ public class EventListener implements Listener {
                     int lightLevel = block.getLightLevel();
                     event.getPlayer().sendMessage(ChatColor.GOLD + "The light level of the selected block is " + lightLevel + ".");
                 }
+            }
+        }
 
+        if (event.getAction() == Action.RIGHT_CLICK_AIR) {
+            if (event.getItem() != null) {
                 if (event.getItem().getType() == HUNGER_INFO_ITEM) {
                     Player player = event.getPlayer();
                     String title = ChatColor.GOLD + "   --- " +
