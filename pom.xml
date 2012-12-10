@@ -5,7 +5,7 @@
 	<name>EndercraftEssentials</name>
 	<groupId>me.limebyte</groupId>
 	<artifactId>endercraftessentials</artifactId>
-	<version>0.2.1</version>
+	<version>0.2.4</version>
 	<inceptionYear>2012</inceptionYear>
 	<description>A bunch of game additions for my private server, Endercraft.</description>
 
