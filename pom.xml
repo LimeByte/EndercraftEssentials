@@ -13,7 +13,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<githubRepo>LimeByte/EndercraftEssentials</githubRepo>
-		<bukkitVersion>1.4.5-R0.2</bukkitVersion>
 	</properties>
 	
 	<!-- License -->
@@ -42,11 +41,11 @@
     <repositories>
         <repository>
             <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/repositories/public/</url>
+            <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
         <repository>
             <id>kitteh-repo</id>
-            <url>http://repo.kitteh.org/content/repositories/public/</url>
+            <url>http://repo.kitteh.org/content/groups/public</url>
         </repository>
     </repositories>
 
@@ -55,13 +54,13 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>${bukkitVersion}</version>
+            <version>LATEST</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.kitteh</groupId>
             <artifactId>tagapi</artifactId>
-            <version>RELEASE</version>
+            <version>LATEST</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
