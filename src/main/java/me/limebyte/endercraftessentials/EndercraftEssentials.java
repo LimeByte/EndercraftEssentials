@@ -19,10 +19,7 @@ public class EndercraftEssentials extends JavaPlugin {
 
         PluginManager pm = this.getServer().getPluginManager();
 
-        if (!Nameplates.init(this)) {
-            pm.disablePlugin(this);
-            return;
-        }
+        Nameplates.init(this, pm);
 
         pm.registerEvents(new EventListener(), this);
         getCommand("formation").setExecutor(new FormationCommand());
