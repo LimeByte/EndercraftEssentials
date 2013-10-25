@@ -8,30 +8,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.kitteh.tag.PlayerReceiveNameTagEvent;
-import org.kitteh.tag.TagAPI;
 
 public class EventListener implements Listener {
 
     private static final Material LIGHT_LEVEL_ITEM = Material.GLOWSTONE_DUST;
     private static final Material HUNGER_INFO_ITEM = Material.POISONOUS_POTATO;
-
-    private static final String REI_PREFIX = "&0&0";
-    private static final String REI_SUFFIX = "&e&f";
-    @SuppressWarnings("unused")
-    private static final String REI_CAVE_MAPPING = "&1";
-    private static final String REI_PLAYER_RADAR = "&2";
-    private static final String REI_ANIMAL_RADAR = "&3";
-    @SuppressWarnings("unused")
-    private static final String REI_MOB_RADAR = "&4";
-    @SuppressWarnings("unused")
-    private static final String REI_SLIME_RADAR = "&5";
-    private static final String REI_SQUID_RADAR = "&6";
-    @SuppressWarnings("unused")
-    private static final String REI_LIVING_RADAR = "&7";
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -49,9 +34,7 @@ public class EventListener implements Listener {
             if (event.getItem() != null) {
                 if (event.getItem().getType() == HUNGER_INFO_ITEM) {
                     Player player = event.getPlayer();
-                    String title = ChatColor.GOLD + "   --- " +
-                            ChatColor.ITALIC + "Hunger Info" +
-                            ChatColor.RESET + ChatColor.GOLD + " ---   ";
+                    String title = ChatColor.GOLD + "   --- " + ChatColor.ITALIC + "Hunger Info" + ChatColor.RESET + ChatColor.GOLD + " ---   ";
 
                     player.sendMessage(title);
                     player.sendMessage(ChatColor.WHITE + "FoodLevel: " + player.getFoodLevel());
@@ -67,19 +50,9 @@ public class EventListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         setDisplayName(player);
-        String welcome = ChatColor.DARK_PURPLE + "Welcome to Endercraft " + player.getDisplayName() + "!";
-        String message = REI_PREFIX + REI_PLAYER_RADAR + REI_ANIMAL_RADAR + REI_SQUID_RADAR + REI_SUFFIX;
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', message) + welcome);
-        event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
 
-        if (isPranked(player)) {
-            player.sendMessage("You have pranked");
-            player.sendMessage("but are now outranked.");
-            player.sendMessage("Blocks for code,");
-            player.sendMessage("pranks echoed.");
-            player.sendMessage("Not to be rude,");
-            player.sendMessage("but I have called you a noob.");
-        }
+        player.sendMessage(ChatColor.GOLD + "Welcome to Endercraft " + player.getDisplayName() + "!");
+        event.setJoinMessage(event.getJoinMessage().replaceAll(player.getName(), player.getDisplayName()));
     }
 
     @EventHandler
@@ -95,16 +68,8 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onNameplate(PlayerReceiveNameTagEvent event) {
-        if (!event.isModified()) {
-            Player player = event.getNamedPlayer();
-            String name = player.getName();
-            String displayName = player.getDisplayName();
-
-            if (name.equalsIgnoreCase("bj2864") || name.equalsIgnoreCase("bg1345") || isPranked(player)) {
-                event.setTag(displayName);
-            }
-        }
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
+        event.setFormat(ChatColor.GREEN + event.getPlayer().getDisplayName() + ": " + event.getMessage());
     }
 
     private void setDisplayName(Player player) {
@@ -118,16 +83,13 @@ public class EventListener implements Listener {
             rename(player, "Ashpof");
         } else if (name.equalsIgnoreCase("tegdim")) {
             rename(player, "Tegdim");
-        }
-
-        if (isPranked(player)) {
-            rename(player, "Noob");
+        } else if (name.equalsIgnoreCase("jerazz")) {
+            rename(player, "Jew");
         }
     }
 
     private void rename(Player player, String name) {
         player.setDisplayName(name);
-        TagAPI.refreshPlayer(player);
         setPlayerListName(player, name);
     }
 
@@ -147,13 +109,6 @@ public class EventListener implements Listener {
                 setPlayerListName(player, name);
             }
         }
-    }
-
-    private boolean isPranked(Player player) {
-        for (String name : EndercraftEssentials.getPrankedNames()) {
-            if (player.getName().equalsIgnoreCase(name)) return true;
-        }
-        return false;
     }
 
 }

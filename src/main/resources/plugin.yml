@@ -10,6 +10,18 @@ website: ${project.url}
 database: false
 
 commands:
-   formation:
-      description: Bedrock formation checker.
-      usage: /<command> <radius>
+    formation:
+        description: Bedrock formation checker.
+        usage: /<command> <radius>
+    vanish:
+        description: Poof!
+        aliases: v
+        permission: ee.vanish
+        usage: /<command>
+    spawn:
+        description: Teleport to the spawn.
+        usage: /<command>
+        
+permissions:
+    ee.vanish:
+        default: op

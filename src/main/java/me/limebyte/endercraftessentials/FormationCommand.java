@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 
 public class FormationCommand implements CommandExecutor {
 
-    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("This command can only be run by a player.");
